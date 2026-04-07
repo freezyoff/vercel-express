@@ -9,7 +9,8 @@ const access: PoolOptions = {
   port:3307,
   connectionLimit: 5,       
   queueLimit: 0,
-  waitForConnections: true
+  waitForConnections: true,
+  enableKeepAlive: true
 };
 
 // Create the pool
