@@ -1,9 +1,11 @@
 import express from 'express'
+import pool from './dbPool.js'
 
 const app = express()
 
-app.get('/', (_req, res) => {
-  res.send('Hello Express!')
+app.get('/', async (_req, res) => {
+  const x = await pool.execute("SELECT * FROM `users`");
+  res.send(`Hello Express!, database lenght: ${x.length}`);
 })
 
 app.get('/api/users/:id', (_req, res) => {
