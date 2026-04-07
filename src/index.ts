@@ -12,7 +12,7 @@ app.get('/', async (_req, res) => {
     x = record.length;
   }
   catch(e){
-    
+    res.send(`Hello Express!, error: ${e}`);  
   }
   finally{
     con.release();
