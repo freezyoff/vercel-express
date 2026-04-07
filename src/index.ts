@@ -10,6 +10,9 @@ app.get('/', async (_req, res) => {
   try{
     const record = await con.execute("SELECT * FROM `users`");
     x = record.length;
+    for (var i=0; i<x; i++){
+      res.send(`record: ${record.at(0)}`);  
+    }
   }
   catch(e){
     res.send(`Hello Express!, error: ${e}`);  
