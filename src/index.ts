@@ -1,15 +1,23 @@
 import express from 'express'
 import pool from './dbPool.js'
+import { QueryResult, RowDataPacket } from 'mysql2';
 
 const app = express()
+
+interface IUser extends RowDataPacket{
+  usrName: string;
+}
 
 app.get('/', async (_req, res) => {
   const con = await pool.getConnection();
   var x:number = -1;
 
   try{
-    const record = await con.execute("SELECT COUNT(id) FROM `users`");
+    const [record, fields] = await con.execute<IUser[]>("SELECT COUNT(id) FROM `users`");
     x = record.length;
+    for (var i=0; i<x; i++){
+      res.send(`record [${i}]: ${record[i]!.usrName}`);
+    }
   }
   catch(e){
     res.send(`Hello Express!, error: ${e}`);  
