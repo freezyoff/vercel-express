@@ -4,7 +4,10 @@ import pool from './dbPool.js'
 const app = express()
 
 app.get('/', async (_req, res) => {
-  const x = await pool.execute("SELECT * FROM `users`");
+  const con = await pool.getConnection();
+  const x = await con.execute("SELECT * FROM `users`");
+  con.release();
+  
   res.send(`Hello Express!, database lenght: ${x.length}`);
 })
 
