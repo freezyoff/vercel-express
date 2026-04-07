@@ -15,9 +15,7 @@ app.get('/', async (_req, res) => {
   try{
     const [record, fields] = await con.execute<IUser[]>("SELECT COUNT(id) FROM `users`");
     x = record.length;
-    for (var i=0; i<x; i++){
-      res.send(`record [${i}]: ${record[i]!.usrName}`);
-    }
+    console.log(record);
   }
   catch(e){
     res.send(`Hello Express!, error: ${e}`);  
