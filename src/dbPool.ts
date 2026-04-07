@@ -10,7 +10,8 @@ const access: PoolOptions = {
   connectionLimit: 5,       
   queueLimit: 0,
   waitForConnections: true,
-  enableKeepAlive: true
+  enableKeepAlive: true,
+  idleTimeout: 3000
 };
 
 // Create the pool

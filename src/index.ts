@@ -5,10 +5,20 @@ const app = express()
 
 app.get('/', async (_req, res) => {
   const con = await pool.getConnection();
-  const x = await con.execute("SELECT * FROM `users`");
-  con.release();
+  var x:number = -1;
+
+  try{
+    const record = await con.execute("SELECT * FROM `users`");
+    x = record.length;
+  }
+  catch(e){
+    
+  }
+  finally{
+    con.release();
+  }
   
-  res.send(`Hello Express!, database lenght: ${x.length}`);
+  res.send(`Hello Express!, database lenght: ${x}`);
 })
 
 app.get('/api/users/:id', (_req, res) => {
